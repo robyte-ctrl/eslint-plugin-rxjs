@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-error");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-ignored-error";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-ignored-error", rule, {
@@ -42,7 +42,7 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
         const observable = of([1, 2]);
         observable.subscribe(() => {});
                    ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -52,7 +52,7 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
         const next = () => {};
         observable.subscribe(next);
                    ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -61,7 +61,7 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
         const subject = new Subject<any>();
         subject.subscribe(() => {});
                 ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -71,7 +71,7 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
         const subject = new Subject<any>();
         subject.subscribe(next);
                 ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -88,7 +88,7 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
           return obs.subscribe((v: T) => {})
                      ~~~~~~~~~ [forbidden]
         }
-      `
+      `,
     ),
   ],
 });

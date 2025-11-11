@@ -3,15 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { stripIndent } from "common-tags";
-import { getTypeServices, isCallExpression, isIdentifier } from "eslint-etc";
+import { getTypeServices, isCallExpression, isIdentifier } from "../etc";
 import ts from "typescript";
 import { defaultObservable } from "../constants";
 import { ruleCreator } from "../utils";
 
 function isTypeReference(type: ts.Type): type is ts.TypeReference {
-  return Boolean((type as any).target);
+  return "target" in type && Boolean(type.target);
 }
 
 const defaultOptions: readonly {
@@ -19,11 +19,11 @@ const defaultOptions: readonly {
 }[] = [];
 
 const rule = ruleCreator({
-  defaultOptions: [],
+  defaultOptions,
   meta: {
     docs: {
       description: "Forbids effects and epics that re-emit filtered actions.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -45,7 +45,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "no-cyclic-action",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const [config = {}] = context.options;
     const { observable = defaultObservable } = config;
     const observableRegExp = new RegExp(observable);
@@ -57,7 +57,7 @@ const rule = ruleCreator({
         (arg) =>
           isCallExpression(arg) &&
           isIdentifier(arg.callee) &&
-          arg.callee.name === "ofType"
+          arg.callee.name === "ofType",
       );
       if (!operatorCallExpression) {
         return;
@@ -65,7 +65,7 @@ const rule = ruleCreator({
       const operatorType = getType(operatorCallExpression);
       const [signature] = typeChecker.getSignaturesOfType(
         operatorType,
-        ts.SignatureKind.Call
+        ts.SignatureKind.Call,
       );
       if (!signature) {
         return;
@@ -117,7 +117,7 @@ const rule = ruleCreator({
       }
       const actionType = typeChecker.getTypeOfSymbolAtLocation(
         symbol,
-        symbol.valueDeclaration
+        symbol.valueDeclaration,
       );
       return [typeChecker.typeToString(actionType)];
     }

@@ -3,16 +3,13 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import {
-  TSESTree as es,
-  TSESLint as eslint,
-} from "@typescript-eslint/experimental-utils";
+import { TSESTree as es, TSESLint as eslint } from "@typescript-eslint/utils";
 import {
   getTypeServices,
   isArrowFunctionExpression,
   isFunctionExpression,
   isMemberExpression,
-} from "eslint-etc";
+} from "../etc";
 import { ruleCreator } from "../utils";
 
 const defaultOptions: readonly {
@@ -25,7 +22,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Forbids the passing separate handlers to `subscribe` and `tap`.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: "code",
     hasSuggestions: true,
@@ -44,7 +41,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "prefer-observer",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const { couldBeFunction, couldBeObservable } = getTypeServices(context);
     const [config = {}] = context.options;
     const { allowNext = true } = config;
@@ -56,7 +53,7 @@ const rule = ruleCreator({
       }
 
       function* fix(fixer: eslint.RuleFixer) {
-        const sourceCode = context.getSourceCode();
+        const { sourceCode } = context;
         const [nextArg, errorArg, completeArg] = args;
         const nextArgText = nextArg ? sourceCode.getText(nextArg) : "";
         const errorArgText = errorArg ? sourceCode.getText(errorArg) : "";
@@ -139,7 +136,7 @@ const rule = ruleCreator({
       "CallExpression[callee.property.name='pipe'] > CallExpression[callee.name='tap']":
         (node: es.CallExpression) => checkArgs(node, node.callee),
       "CallExpression[callee.property.name='subscribe']": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => checkArgs(node, (node.callee as es.MemberExpression).property),
     };
   },

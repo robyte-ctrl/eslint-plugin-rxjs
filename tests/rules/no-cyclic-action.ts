@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-cyclic-action");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-cyclic-action";
 import { ruleTester } from "../utils";
 
 const setup = stripIndent`
@@ -69,7 +69,7 @@ ruleTester({ types: true }).run("no-cyclic-action", rule, {
                   ~~~~~~~~~~~~ [forbidden]
         const d = actions.pipe(ofType(SOMETHING), mapTo({ type: SOMETHING } as const));
                   ~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -83,7 +83,7 @@ ruleTester({ types: true }).run("no-cyclic-action", rule, {
                                         ~~~~~~~~~~~~ [forbidden]
         const d = (action$: Actions) => action$.pipe(ofType(SOMETHING), mapTo({ type: SOMETHING } as const));
                                         ~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -97,7 +97,7 @@ ruleTester({ types: true }).run("no-cyclic-action", rule, {
                   ~~~~~~~~~~~~ [forbidden]
         const d = actions.pipe(ofType(SOMETHING, SOMETHING_ELSE), mapTo({ type: SOMETHING } as const));
                   ~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -111,7 +111,7 @@ ruleTester({ types: true }).run("no-cyclic-action", rule, {
                                         ~~~~~~~~~~~~ [forbidden]
         const d = (action$: Actions) => action$.pipe(ofType(SOMETHING, SOMETHING_ELSE), mapTo({ type: SOMETHING } as const));
                                         ~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

@@ -3,10 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import {
-  TSESLint as eslint,
-  TSESTree as es,
-} from "@typescript-eslint/experimental-utils";
+import { TSESLint as eslint, TSESTree as es } from "@typescript-eslint/utils";
 import {
   getParent,
   getTypeServices,
@@ -15,7 +12,7 @@ import {
   isIdentifier,
   isMemberExpression,
   isProgram,
-} from "eslint-etc";
+} from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -24,7 +21,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Forbids redundant notifications from completed or errored observables.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -36,7 +33,7 @@ const rule = ruleCreator({
   },
   name: "no-redundant-notify",
   create: (context) => {
-    const sourceCode = context.getSourceCode();
+    const { sourceCode } = context;
     const { couldBeType } = getTypeServices(context);
     return {
       "ExpressionStatement[expression.callee.property.name=/^(complete|error)$/] + ExpressionStatement[expression.callee.property.name=/^(next|complete|error)$/]":
@@ -83,7 +80,7 @@ const rule = ruleCreator({
 
 function getExpressionText(
   expressionStatement: es.ExpressionStatement,
-  sourceCode: eslint.SourceCode
+  sourceCode: eslint.SourceCode,
 ): string | undefined {
   if (!isCallExpression(expressionStatement.expression)) {
     return undefined;
@@ -101,8 +98,8 @@ function isExpressionObserver(
   couldBeType: (
     node: es.Node,
     name: string | RegExp,
-    qualified?: { name: RegExp }
-  ) => boolean
+    qualified?: { name: RegExp },
+  ) => boolean,
 ): boolean {
   if (!isCallExpression(expressionStatement.expression)) {
     return false;

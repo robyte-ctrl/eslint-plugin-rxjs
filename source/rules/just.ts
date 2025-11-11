@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -11,7 +11,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Enforces the use of a `just` alias for `of`.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: "code",
     hasSuggestions: false,
@@ -40,7 +40,8 @@ const rule = ruleCreator({
             fix: (fixer) => fixer.replaceTextRange(node.range, "of as just"),
           });
 
-          const [ofImport] = context.getDeclaredVariables(node);
+          const [ofImport] = context.sourceCode.getDeclaredVariables(node);
+
           ofImport.references.forEach((ref) => {
             context.report({
               messageId: "forbidden",

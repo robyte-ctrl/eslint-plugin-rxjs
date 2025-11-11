@@ -3,8 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getTypeServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -13,7 +13,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Forbids calling the `unsubscribe` method of a subject instance.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -29,7 +29,7 @@ const rule = ruleCreator({
 
     return {
       "MemberExpression[property.name='unsubscribe']": (
-        node: es.MemberExpression
+        node: es.MemberExpression,
       ) => {
         if (couldBeSubject(node.object)) {
           context.report({
@@ -39,7 +39,7 @@ const rule = ruleCreator({
         }
       },
       "CallExpression[callee.property.name='add'][arguments.length > 0]": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         const memberExpression = node.callee as es.MemberExpression;
         if (couldBeSubscription(memberExpression.object)) {

@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-create");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-create";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-create", rule, {
@@ -22,7 +22,7 @@ ruleTester({ types: true }).run("no-create", rule, {
             observer.complete();
             return () => {};
         });
-      `
+      `,
     ),
   ],
 });

@@ -3,10 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import {
-  TSESLint as eslint,
-  TSESTree as es,
-} from "@typescript-eslint/experimental-utils";
+import { TSESLint as eslint, TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -14,7 +11,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Enforces the use of the RxJS Tools Babel macro.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: "code",
     hasSuggestions: false,
@@ -31,16 +28,19 @@ const rule = ruleCreator({
     let program: es.Program | undefined = undefined;
 
     function fix(fixer: eslint.RuleFixer) {
+      if (!program) {
+        return null;
+      }
+
       return fixer.insertTextBefore(
-        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-        program!,
-        `import "babel-plugin-rxjs-tools/macro";\n`
+        program,
+        `import "babel-plugin-rxjs-tools/macro";\n`,
       );
     }
 
     return {
       "CallExpression[callee.property.name=/^(pipe|subscribe)$/]": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         if (hasFailure || hasMacroImport) {
           return;
@@ -52,13 +52,11 @@ const rule = ruleCreator({
           node: node.callee,
         });
       },
-      "ImportDeclaration[source.value='babel-plugin-rxjs-tools/macro']": (
-        node: es.ImportDeclaration
-      ) => {
+      "ImportDeclaration[source.value='babel-plugin-rxjs-tools/macro']": () => {
         hasMacroImport = true;
       },
       [String.raw`ImportDeclaration[source.value=/^rxjs(\u002f|$)/]`]: (
-        node: es.ImportDeclaration
+        node: es.ImportDeclaration,
       ) => {
         if (hasFailure || hasMacroImport) {
           return;

@@ -3,8 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getParent, getTypeServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getParent, getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -12,7 +12,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids passing `async` functions to `subscribe`.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -27,7 +27,7 @@ const rule = ruleCreator({
     const { couldBeObservable } = getTypeServices(context);
 
     function checkNode(
-      node: es.FunctionExpression | es.ArrowFunctionExpression
+      node: es.FunctionExpression | es.ArrowFunctionExpression,
     ) {
       const parentNode = getParent(node) as es.CallExpression;
       const callee = parentNode.callee as es.MemberExpression;

@@ -3,14 +3,10 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import {
-  getParserServices,
-  getTypeServices,
-  isMemberExpression,
-} from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getParserServices, getTypeServices, isMemberExpression } from "../etc";
 import * as tsutils from "tsutils";
-import { couldBeType, isReferenceType, isUnionType } from "tsutils-etc";
+import { couldBeType, isReferenceType, isUnionType } from "../tsutils-etc";
 import * as ts from "typescript";
 import { ruleCreator } from "../utils";
 
@@ -19,7 +15,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids unsafe optional `next` calls.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -35,11 +31,11 @@ const rule = ruleCreator({
     const { typeChecker } = getTypeServices(context);
     return {
       [`CallExpression[callee.property.name='next']`]: (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         if (node.arguments.length === 0 && isMemberExpression(node.callee)) {
           const type = typeChecker.getTypeAtLocation(
-            esTreeNodeToTSNodeMap.get(node.callee.object)
+            esTreeNodeToTSNodeMap.get(node.callee.object),
           );
           if (isReferenceType(type) && couldBeType(type, "Subject")) {
             const [typeArg] = typeChecker.getTypeArguments(type);
@@ -55,7 +51,7 @@ const rule = ruleCreator({
             if (
               isUnionType(typeArg) &&
               typeArg.types.some((t) =>
-                tsutils.isTypeFlagSet(t, ts.TypeFlags.Void)
+                tsutils.isTypeFlagSet(t, ts.TypeFlags.Void),
               )
             ) {
               return;

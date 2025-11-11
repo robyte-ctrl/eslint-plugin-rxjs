@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-explicit-generics");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-explicit-generics";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-explicit-generics", rule, {
@@ -53,31 +53,31 @@ ruleTester({ types: false }).run("no-explicit-generics", rule, {
           scan<number, string>((acc, value) => acc + value, "")
           ~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         const b = new BehaviorSubject<number>(42);
                       ~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         const f = from<number>([42, 54]);
                   ~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
       const o = of<number>(42, 54);
                 ~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
       const n = new Notification<number>("N", 42);
                     ~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

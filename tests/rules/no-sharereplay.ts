@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-sharereplay");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-sharereplay";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-sharereplay", rule, {
@@ -34,7 +34,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           ~~~~~~~~~~~ [forbidden]
         );
       `,
-      { options: [{ allowConfig: false }] }
+      { options: [{ allowConfig: false }] },
     ),
     fromFixture(
       stripIndent`
@@ -44,7 +44,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           ~~~~~~~~~~~ [forbiddenWithoutConfig]
         );
       `,
-      { options: [{ allowConfig: true }] }
+      { options: [{ allowConfig: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -53,7 +53,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           shareReplay(1)
           ~~~~~~~~~~~ [forbiddenWithoutConfig]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -62,7 +62,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           shareReplay(1, 100)
           ~~~~~~~~~~~ [forbiddenWithoutConfig]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -71,7 +71,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           shareReplay(1, 100, asapScheduler)
           ~~~~~~~~~~~ [forbiddenWithoutConfig]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -81,7 +81,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           ~~~~~~~~~~~ [forbidden]
         );
       `,
-      { options: [{ allowConfig: false }] }
+      { options: [{ allowConfig: false }] },
     ),
     fromFixture(
       stripIndent`
@@ -91,7 +91,7 @@ ruleTester({ types: false }).run("no-sharereplay", rule, {
           ~~~~~~~~~~~ [forbidden]
         );
       `,
-      { options: [{ allowConfig: false }] }
+      { options: [{ allowConfig: false }] },
     ),
   ],
 });

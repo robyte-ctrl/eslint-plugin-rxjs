@@ -1,5 +1,7 @@
 yarn-error.log
 /build
-/dist
+# /dist
 /node_modules
 /temp
+
+/eslint-plugin-rxjs-*.tgz

@@ -3,8 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getParent, getTypeServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getParent, getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -13,7 +13,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Forbids accessing the `value` property of a `BehaviorSubject` instance.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,

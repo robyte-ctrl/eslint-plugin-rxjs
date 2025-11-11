@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
 const defaultOptions: readonly {
@@ -15,7 +15,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids using the `shareReplay` operator.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -35,12 +35,12 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "no-sharereplay",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const [config = {}] = context.options;
     const { allowConfig = true } = config;
     return {
       "CallExpression[callee.name='shareReplay']": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         let report = true;
         if (allowConfig) {

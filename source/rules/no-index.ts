@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -11,7 +11,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids the importation from index modules.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,

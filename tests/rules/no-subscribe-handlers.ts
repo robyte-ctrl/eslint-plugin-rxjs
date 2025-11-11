@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-subscribe-handlers");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-subscribe-handlers";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
@@ -61,7 +61,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
         const observable = of([1, 2]);
         observable.subscribe(value => console.log(value));
                    ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -71,7 +71,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
         const subject = new Subject<any>();
         subject.subscribe(value => console.log(value));
                 ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -85,7 +85,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
         const observable = of([1, 2]);
         observable.subscribe(log);
                    ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -93,7 +93,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe((value) => console.log(value));
                      ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -103,7 +103,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
                      ~~~~~~~~~ [forbidden]
           next: (value) => console.log(value)
         });
-      `
+      `,
     ),
   ],
 });

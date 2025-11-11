@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { AST_NODE_TYPES, TSESTree as es } from "@typescript-eslint/utils";
 import { stripIndent } from "common-tags";
 import { ruleCreator } from "../utils";
 
@@ -14,7 +14,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids the use of banned operators.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -32,8 +32,8 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "ban-operators",
-  create: (context, unused: typeof defaultOptions) => {
-    let bans: { explanation: string; regExp: RegExp }[] = [];
+  create: (context) => {
+    const bans: { explanation: string; regExp: RegExp }[] = [];
 
     const [config] = context.options;
     if (!config) {
@@ -67,7 +67,11 @@ const rule = ruleCreator({
       [String.raw`ImportDeclaration[source.value=/^rxjs\u002foperators$/] > ImportSpecifier`]:
         (node: es.ImportSpecifier) => {
           const identifier = node.imported;
-          const failure = getFailure(identifier.name);
+          const failure = getFailure(
+            identifier.type === AST_NODE_TYPES.Identifier
+              ? identifier.name
+              : identifier.value,
+          );
           if (failure) {
             context.report({
               ...failure,

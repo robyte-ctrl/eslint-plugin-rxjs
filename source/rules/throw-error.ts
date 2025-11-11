@@ -3,9 +3,9 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getParserServices, getTypeServices } from "eslint-etc";
-import { couldBeFunction, couldBeType, isAny, isUnknown } from "tsutils-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getParserServices, getTypeServices } from "../etc";
+import { couldBeFunction, couldBeType, isAny, isUnknown } from "../tsutils-etc";
 import * as ts from "typescript";
 import { ruleCreator } from "../utils";
 
@@ -15,7 +15,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Enforces the passing of `Error` values to error notifications.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,

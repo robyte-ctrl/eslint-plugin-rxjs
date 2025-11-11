@@ -3,9 +3,9 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { stripIndent } from "common-tags";
-import { getTypeServices, isCallExpression, isIdentifier } from "eslint-etc";
+import { getTypeServices, isCallExpression, isIdentifier } from "../etc";
 import { defaultObservable } from "../constants";
 import { ruleCreator } from "../utils";
 
@@ -18,7 +18,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids unsafe `first`/`take` usage in effects and epics.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -40,7 +40,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "no-unsafe-first",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const invalidOperatorsRegExp = /^(take|first)$/;
 
     const [config = {}] = context.options;

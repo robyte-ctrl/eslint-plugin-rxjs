@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-takeuntil");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-unsafe-takeuntil";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
@@ -199,7 +199,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
 
         const d = a.pipe(takeUntil(c), switchMap(_ => b)).subscribe();
                          ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -214,7 +214,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
 
         const e = a.pipe(takeUntil(d), s => combineLatest(s, b, c)).subscribe();
                          ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -235,7 +235,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
             allow: ["tap"],
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -263,7 +263,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
             return output;
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -286,7 +286,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
             alias: ["untilDestroyed"],
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -309,7 +309,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
             alias: ["untilDestroyed"],
           },
         ],
-      }
+      },
     ),
   ],
 });

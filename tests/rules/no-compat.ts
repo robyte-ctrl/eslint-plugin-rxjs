@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-compat");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-compat";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-compat", rule, {
@@ -23,49 +23,49 @@ ruleTester({ types: false }).run("no-compat", rule, {
       stripIndent`
         import * as Rx from "rxjs/Rx";
                             ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import { Observable } from "rxjs/Observable";
                                    ~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import { Subject } from "rxjs/Subject";
                                 ~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import { merge } from "rxjs/observable/merge";
                               ~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import { merge } from "rxjs/operator/merge";
                               ~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import { asap } from "rxjs/scheduler/asap";
                              ~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import "rxjs/add/observable/merge";
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
         import "rxjs/add/operator/mergeMap";
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

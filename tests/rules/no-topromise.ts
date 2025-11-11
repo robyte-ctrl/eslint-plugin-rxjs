@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-topromise");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-topromise";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-topromise", rule, {
@@ -34,7 +34,7 @@ ruleTester({ types: true }).run("no-topromise", rule, {
         const a = of("a");
         a.toPromise().then(value => console.log(value));
           ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -43,7 +43,7 @@ ruleTester({ types: true }).run("no-topromise", rule, {
         const a = new Subject<string>();
         a.toPromise().then(value => console.log(value));
           ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

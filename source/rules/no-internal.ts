@@ -3,10 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import {
-  TSESTree as es,
-  TSESLint as eslint,
-} from "@typescript-eslint/experimental-utils";
+import { TSESTree as es, TSESLint as eslint } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -14,7 +11,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids the importation of internals.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: "code",
     hasSuggestions: true,
@@ -62,7 +59,7 @@ const rule = ruleCreator({
 
     return {
       [String.raw`ImportDeclaration Literal[value=/^rxjs\u002finternal/]`]: (
-        node: es.Literal
+        node: es.Literal,
       ) => {
         const replacement = getReplacement(node.raw);
         if (replacement) {

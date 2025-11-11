@@ -3,14 +3,14 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import {
   findParent,
   getLoc,
   getParent,
   getParserServices,
   getTypeServices,
-} from "eslint-etc";
+} from "../etc";
 import { ruleCreator } from "../utils";
 
 const defaultOptions: readonly {
@@ -29,7 +29,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Enforces the use of Finnish notation.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -55,7 +55,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "finnish",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const { esTreeNodeToTSNodeMap } = getParserServices(context);
     const {
       couldBeObservable,
@@ -80,7 +80,7 @@ const rule = ruleCreator({
       Object.entries(config.names).forEach(
         ([key, validate]: [string, boolean]) => {
           names.push({ regExp: new RegExp(key), validate });
-        }
+        },
       );
     } else {
       names.push({
@@ -95,7 +95,7 @@ const rule = ruleCreator({
       Object.entries(config.types).forEach(
         ([key, validate]: [string, boolean]) => {
           types.push({ regExp: new RegExp(key), validate });
-        }
+        },
       );
     } else {
       types.push({
@@ -105,7 +105,8 @@ const rule = ruleCreator({
     }
 
     function checkNode(nameNode: es.Node, typeNode?: es.Node) {
-      let tsNode = esTreeNodeToTSNodeMap.get(nameNode);
+      const tsNode = esTreeNodeToTSNodeMap.get(nameNode);
+
       const text = tsNode.getText();
       const hasFinnish = /\$$/.test(text);
       if (hasFinnish && !strict) {
@@ -160,7 +161,7 @@ const rule = ruleCreator({
           "ArrowFunctionExpression",
           "FunctionDeclaration",
           "FunctionExpression",
-          "VariableDeclarator"
+          "VariableDeclarator",
         );
         if (!found) {
           return;
@@ -211,28 +212,28 @@ const rule = ruleCreator({
         }
       },
       "MethodDefinition[kind='get'][computed=false]": (
-        node: es.MethodDefinition
+        node: es.MethodDefinition,
       ) => {
         if (validate.properties) {
           checkNode(node.key, node);
         }
       },
       "MethodDefinition[kind='method'][computed=false]": (
-        node: es.MethodDefinition
+        node: es.MethodDefinition,
       ) => {
         if (validate.methods) {
           checkNode(node.key, node);
         }
       },
       "MethodDefinition[kind='set'][computed=false]": (
-        node: es.MethodDefinition
+        node: es.MethodDefinition,
       ) => {
         if (validate.properties) {
           checkNode(node.key, node);
         }
       },
       "ObjectExpression > Property[computed=false] > Identifier": (
-        node: es.Identifier
+        node: es.Identifier,
       ) => {
         if (validate.properties) {
           const parent = getParent(node) as es.Property;
@@ -247,7 +248,7 @@ const rule = ruleCreator({
           "ArrowFunctionExpression",
           "FunctionDeclaration",
           "FunctionExpression",
-          "VariableDeclarator"
+          "VariableDeclarator",
         );
         if (!found) {
           return;

@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -12,7 +12,7 @@ const rule = ruleCreator({
     deprecated: true,
     docs: {
       description: "Forbids the use of the `tap` operator.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,

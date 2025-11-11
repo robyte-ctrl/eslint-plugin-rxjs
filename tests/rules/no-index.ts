@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-index");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-index";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-index", rule, {
@@ -37,7 +37,7 @@ ruleTester({ types: false }).run("no-index", rule, {
                                       ~~~~~~~~~~~~~~~~~~~~ [forbidden]
         import { WebSocketSubject } from "rxjs/webSocket/index";
                                          ~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -50,7 +50,7 @@ ruleTester({ types: false }).run("no-index", rule, {
                                       ~~~~~~~~~~~~~~~~~~~~ [forbidden]
         import { WebSocketSubject } from 'rxjs/webSocket/index';
                                          ~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

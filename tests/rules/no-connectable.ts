@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-connectable");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-connectable";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-connectable", rule, {
@@ -67,7 +67,7 @@ ruleTester({ types: true }).run("no-connectable", rule, {
           publish()
           ~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -78,7 +78,7 @@ ruleTester({ types: true }).run("no-connectable", rule, {
           publishBehavior(1)
           ~~~~~~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -89,7 +89,7 @@ ruleTester({ types: true }).run("no-connectable", rule, {
           publishLast()
           ~~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -100,7 +100,7 @@ ruleTester({ types: true }).run("no-connectable", rule, {
           publishReplay(1)
           ~~~~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -111,7 +111,7 @@ ruleTester({ types: true }).run("no-connectable", rule, {
           multicast(new Subject<number>())
           ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -122,7 +122,7 @@ ruleTester({ types: true }).run("no-connectable", rule, {
           multicast(() => new Subject<number>())
           ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
   ],
 });

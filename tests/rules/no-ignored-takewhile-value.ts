@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-takewhile-value");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-ignored-takewhile-value";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
@@ -104,7 +104,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
             ).subscribe();
           }
         };
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -120,7 +120,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
             ).subscribe();
           }
         };
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -136,7 +136,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
             ).subscribe();
           }
         };
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -152,7 +152,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
             ).subscribe();
           }
         };
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -168,7 +168,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
             ).subscribe();
           }
         };
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -184,7 +184,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
             ).subscribe();
           }
         };
-      `
+      `,
     ),
   ],
 });

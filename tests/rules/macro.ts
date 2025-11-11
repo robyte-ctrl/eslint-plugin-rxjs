@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/macro");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/macro";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("macro", rule, {
@@ -45,7 +45,7 @@ ruleTester({ types: true }).run("macro", rule, {
           import "babel-plugin-rxjs-tools/macro";
           import { of } from "rxjs";
         `,
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -61,7 +61,7 @@ ruleTester({ types: true }).run("macro", rule, {
           import { foo, goo } from "bar";
           const hoo = foo.pipe(goo());
         `,
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -77,7 +77,7 @@ ruleTester({ types: true }).run("macro", rule, {
           import { foo } from "bar";
           foo.subscribe();
         `,
-      }
+      },
     ),
   ],
 });

@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/finnish");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/finnish";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("finnish", rule, {
@@ -210,7 +210,7 @@ ruleTester({ types: true }).run("finnish", rule, {
 
         const someOptionalObservable: Observable<any> | undefined = of();
               ~~~~~~~~~~~~~~~~~~~~~~ [shouldBeFinnish]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -240,7 +240,7 @@ ruleTester({ types: true }).run("finnish", rule, {
             },
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -263,7 +263,7 @@ ruleTester({ types: true }).run("finnish", rule, {
             },
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -274,7 +274,7 @@ ruleTester({ types: true }).run("finnish", rule, {
         const someArray = [someObservable$];
         function someFunction(someParam$: Observable<any>): Observable<any> { return someParam$; }
                  ~~~~~~~~~~~~ [shouldBeFinnish]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -290,7 +290,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           someMethod(someParam$: Observable<any>): Observable<any>;
           ~~~~~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -324,7 +324,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           (someParam: Observable<any>): void;
            ~~~~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -349,7 +349,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           someProperty: Observable<any>;
           ~~~~~~~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -368,7 +368,7 @@ ruleTester({ types: true }).run("finnish", rule, {
         const someArray = [someObservable];
         const [someElement] = someArray;
                ~~~~~~~~~~~ [shouldBeFinnish]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -384,7 +384,7 @@ ruleTester({ types: true }).run("finnish", rule, {
         const someArray = [someObservable];
         const [someElement] = someArray;
       `,
-      { options: [{ variables: false }] }
+      { options: [{ variables: false }] },
     ),
     fromFixture(
       stripIndent`
@@ -405,7 +405,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           (someParam: Observable<any>): void;
            ~~~~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -425,7 +425,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           ~~~~~~~~~~ [shouldBeFinnish]
           (someValue: any): Observable<any>;
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -439,7 +439,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           someMethod([someParam]: Observable<any>[]): void {}
                       ~~~~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -453,7 +453,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           someMethod({ source }: Record<string, Observable<any>>): void {}
                        ~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -464,7 +464,7 @@ ruleTester({ types: true }).run("finnish", rule, {
           constructor(public someProp: Observable<any>) {}
                              ~~~~~~~~ [shouldBeFinnish]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -472,7 +472,7 @@ ruleTester({ types: true }).run("finnish", rule, {
         const answer$ = 42;
               ~~~~~~~ [shouldNotBeFinnish]
       `,
-      { options: [{ strict: true }] }
+      { options: [{ strict: true }] },
     ),
   ],
 });

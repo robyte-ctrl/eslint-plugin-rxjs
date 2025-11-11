@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-replay-buffer");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-ignored-replay-buffer";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
@@ -74,7 +74,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
                       ~~~~~~~~~~~~~ [forbidden]
         const b = new Thing(new ReplaySubject<number>());
                                 ~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -84,7 +84,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
 
         const a = of(42).pipe(publishReplay());
                               ~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -94,7 +94,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
 
         const a = of(42).pipe(shareReplay());
                               ~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -105,7 +105,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
                          ~~~~~~~~~~~~~ [forbidden]
         const b = new Thing(new Rx.ReplaySubject<number>());
                                    ~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -115,7 +115,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
 
         const a = Rx.of(42).pipe(publishReplay());
                                  ~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -125,7 +125,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
 
         const a = Rx.of(42).pipe(shareReplay());
                                  ~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -139,7 +139,7 @@ ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {
                                   ~~~~~~~~~~~~~ [forbidden]
           }
         }
-      `
+      `,
     ),
   ],
 });

@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+module.exports.configs = require("requireindex")(`${__dirname}/configs`);
+module.exports.rules = require("requireindex")(`${__dirname}/rules`);

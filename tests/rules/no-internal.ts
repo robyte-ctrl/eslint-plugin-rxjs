@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-internal");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-internal";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-internal", rule, {
@@ -54,7 +54,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -88,7 +88,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -110,7 +110,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -132,7 +132,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -154,7 +154,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -176,7 +176,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -198,7 +198,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -220,7 +220,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -242,7 +242,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -264,7 +264,7 @@ ruleTester({ types: false }).run("no-internal", rule, {
             `,
           },
         ],
-      }
+      },
     ),
   ],
 });

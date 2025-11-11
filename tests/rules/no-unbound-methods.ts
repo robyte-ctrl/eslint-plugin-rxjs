@@ -3,18 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESLint as eslint } from "@typescript-eslint/experimental-utils";
+import type { RunTests } from "@typescript-eslint/rule-tester";
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unbound-methods");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-unbound-methods";
 import { ruleTester } from "../utils";
 
-interface Tests {
-  valid: (string | eslint.ValidTestCase<any>)[];
-  invalid: eslint.InvalidTestCase<any, any>[];
-}
+type Tests = RunTests<"forbidden", readonly unknown[]>;
 
-const arrowTests: Tests = {
+const arrowTests = {
   valid: [
     stripIndent`
       // arrows
@@ -49,9 +46,9 @@ const arrowTests: Tests = {
     `,
   ],
   invalid: [],
-};
+} satisfies Tests;
 
-const boundTests: Tests = {
+const boundTests = {
   valid: [
     stripIndent`
       // bound
@@ -86,9 +83,9 @@ const boundTests: Tests = {
     `,
   ],
   invalid: [],
-};
+} satisfies Tests;
 
-const deepTests: Tests = {
+const deepTests = {
   valid: [],
   invalid: [
     fromFixture(
@@ -127,7 +124,7 @@ const deepTests: Tests = {
             );
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -146,12 +143,12 @@ const deepTests: Tests = {
                              ~~~~~~~~~~~~~~~~~~ [forbidden]
           }
         }
-      `
+      `,
     ),
   ],
-};
+} satisfies Tests;
 
-const staticTests: Tests = {
+const staticTests = {
   valid: [
     stripIndent`
       // static
@@ -186,9 +183,9 @@ const staticTests: Tests = {
     `,
   ],
   invalid: [],
-};
+} satisfies Tests;
 
-const unboundTests: Tests = {
+const unboundTests = {
   valid: [
     stripIndent`
       // unbound observable
@@ -228,7 +225,7 @@ const unboundTests: Tests = {
           map<T>(t: T): T { return t; }
           catchError(error: any): Observable<never> { return throwError(error); }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -250,7 +247,7 @@ const unboundTests: Tests = {
           error(error: any): void {}
           complete(): void {}
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -266,10 +263,10 @@ const unboundTests: Tests = {
           }
           tearDown(): void {}
         }
-      `
+      `,
     ),
   ],
-};
+} satisfies Tests;
 
 ruleTester({ types: true }).run("no-unbound-methods", rule, {
   valid: [

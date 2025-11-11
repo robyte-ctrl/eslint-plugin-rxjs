@@ -3,14 +3,14 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import {
   findParent,
   getLoc,
   getParent,
   getParserServices,
   getTypeServices,
-} from "eslint-etc";
+} from "../etc";
 import { escapeRegExp, ruleCreator } from "../utils";
 
 const defaultOptions: readonly {
@@ -26,7 +26,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Enforces the use of a suffix in subject identifiers.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -48,7 +48,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "suffix-subjects",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const { esTreeNodeToTSNodeMap } = getParserServices(context);
     const { couldBeType } = getTypeServices(context);
     const [config = {}] = context.options;
@@ -65,7 +65,7 @@ const rule = ruleCreator({
       Object.entries(config.types).forEach(
         ([key, validate]: [string, boolean]) => {
           types.push({ regExp: new RegExp(key), validate });
-        }
+        },
       );
     } else {
       types.push({
@@ -77,12 +77,14 @@ const rule = ruleCreator({
     const { suffix = "Subject" } = config;
     const suffixRegex = new RegExp(
       String.raw`${escapeRegExp(suffix)}\$?$`,
-      "i"
+      "i",
     );
 
     function checkNode(nameNode: es.Node, typeNode?: es.Node) {
-      let tsNode = esTreeNodeToTSNodeMap.get(nameNode);
+      const tsNode = esTreeNodeToTSNodeMap.get(nameNode);
+
       const text = tsNode.getText();
+
       if (
         !suffixRegex.test(text) &&
         couldBeType(typeNode || nameNode, "Subject")
@@ -108,7 +110,7 @@ const rule = ruleCreator({
           "ArrowFunctionExpression",
           "FunctionDeclaration",
           "FunctionExpression",
-          "VariableDeclarator"
+          "VariableDeclarator",
         );
         if (!found) {
           return;
@@ -130,9 +132,8 @@ const rule = ruleCreator({
         }
       },
       "PropertyDefinition[computed=false]": (node: es.PropertyDefinition) => {
-        const anyNode = node as any;
         if (validate.properties) {
-          checkNode(anyNode.key);
+          checkNode(node.key);
         }
       },
       "FunctionDeclaration > Identifier": (node: es.Identifier) => {
@@ -152,21 +153,21 @@ const rule = ruleCreator({
         }
       },
       "MethodDefinition[kind='get'][computed=false]": (
-        node: es.MethodDefinition
+        node: es.MethodDefinition,
       ) => {
         if (validate.properties) {
           checkNode(node.key, node);
         }
       },
       "MethodDefinition[kind='set'][computed=false]": (
-        node: es.MethodDefinition
+        node: es.MethodDefinition,
       ) => {
         if (validate.properties) {
           checkNode(node.key, node);
         }
       },
       "ObjectExpression > Property[computed=false] > Identifier": (
-        node: es.ObjectExpression
+        node: es.ObjectExpression,
       ) => {
         if (validate.properties) {
           const parent = getParent(node) as es.Property;
@@ -181,7 +182,7 @@ const rule = ruleCreator({
           "ArrowFunctionExpression",
           "FunctionDeclaration",
           "FunctionExpression",
-          "VariableDeclarator"
+          "VariableDeclarator",
         );
         if (!found) {
           return;
@@ -217,10 +218,9 @@ const rule = ruleCreator({
           checkNode(node);
         }
       },
-      "TSPropertySignature[computed=false]": (node: es.Node) => {
-        const anyNode = node as any;
+      "TSPropertySignature[computed=false]": (node: es.TSPropertySignature) => {
         if (validate.properties) {
-          checkNode(anyNode.key);
+          checkNode(node.key);
         }
       },
       "VariableDeclarator > Identifier": (node: es.Identifier) => {

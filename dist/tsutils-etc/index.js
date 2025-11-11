@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+tslib_1.__exportStar(require("./could-be-function"), exports);
+tslib_1.__exportStar(require("./could-be-type"), exports);
+tslib_1.__exportStar(require("./could-implement"), exports);
+tslib_1.__exportStar(require("./is-any"), exports);
+tslib_1.__exportStar(require("./is-intersection-type"), exports);
+tslib_1.__exportStar(require("./is-reference-type"), exports);
+tslib_1.__exportStar(require("./is-type"), exports);
+tslib_1.__exportStar(require("./is-union-type"), exports);
+tslib_1.__exportStar(require("./is-unknown"), exports);

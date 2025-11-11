@@ -3,13 +3,13 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import {
   getParent,
   getTypeServices,
   isCallExpression,
   isMemberExpression,
-} from "eslint-etc";
+} from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -17,7 +17,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids the passing of unbound methods.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -44,7 +44,7 @@ const rule = ruleCreator({
 
     function isObservableOrSubscription(
       node: es.CallExpression,
-      action: (node: es.CallExpression) => void
+      action: (node: es.CallExpression) => void,
     ) {
       if (!isMemberExpression(node.callee)) {
         return;
@@ -60,14 +60,14 @@ const rule = ruleCreator({
 
     return {
       "CallExpression[callee.property.name='pipe']": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         isObservableOrSubscription(node, ({ arguments: args }) => {
           args.filter(isCallExpression).forEach(mapArguments);
         });
       },
       "CallExpression[callee.property.name=/^(add|subscribe)$/]": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         isObservableOrSubscription(node, mapArguments);
       },

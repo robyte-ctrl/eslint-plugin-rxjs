@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-subject-next");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-unsafe-subject-next";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
@@ -78,7 +78,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
         const s = new Subject<number>();
         s.next();
           ~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -87,7 +87,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
         const s = new ReplaySubject<number>();
         s.next();
           ~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

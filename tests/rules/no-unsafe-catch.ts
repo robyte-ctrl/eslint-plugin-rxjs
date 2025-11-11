@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-catch");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-unsafe-catch";
 import { ruleTester } from "../utils";
 
 const setup = stripIndent`
@@ -117,7 +117,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
           ~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -130,7 +130,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
           ~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -143,7 +143,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
           ~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -163,7 +163,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
             observable: "foo",
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -188,7 +188,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
             ~~~~~~~~~~ [forbidden]
           );
         }
-      `
+      `,
     ),
   ],
 });

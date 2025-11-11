@@ -3,12 +3,12 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import {
   getTypeServices,
   isArrowFunctionExpression,
   isFunctionExpression,
-} from "eslint-etc";
+} from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -17,7 +17,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Forbids observables not composed from the `repeatWhen` or `retryWhen` notifier.",
-      recommended: "error",
+      // recommended: "error",
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -45,7 +45,7 @@ const rule = ruleCreator({
 
     return {
       "CallExpression[callee.name=/^(repeatWhen|retryWhen)$/]": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         if (couldBeMonoTypeOperatorFunction(node)) {
           const [arg] = node.arguments;
@@ -67,7 +67,7 @@ const rule = ruleCreator({
         }
       },
       "CallExpression[callee.name=/^(repeatWhen|retryWhen)$/]:exit": (
-        node: es.CallExpression
+        node: es.CallExpression,
       ) => {
         const entry = getEntry();
         if (!entry) {

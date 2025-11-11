@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/ban-operators");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/ban-operators";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("ban-operators", rule, {
@@ -45,7 +45,7 @@ ruleTester({ types: false }).run("ban-operators", rule, {
             mergeMap: false,
           },
         ],
-      }
+      },
     ),
   ],
 });

@@ -3,8 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getTypeServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -13,7 +13,7 @@ const rule = ruleCreator({
     docs: {
       description:
         "Forbids the calling of `subscribe` without specifying arguments.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,

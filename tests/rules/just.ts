@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/just");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/just";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("just", rule, {
@@ -59,7 +59,7 @@ ruleTester({ types: true }).run("just", rule, {
           const a = just("a");
           const b = just("b");
         `,
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -100,7 +100,7 @@ ruleTester({ types: true }).run("just", rule, {
             of();
           }
         `,
-      }
+      },
     ),
   ],
 });

@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-subscription");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-ignored-subscription";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-ignored-subscription", rule, {
@@ -53,7 +53,7 @@ ruleTester({ types: true }).run("no-ignored-subscription", rule, {
         import { of } from "rxjs";
         of(42).subscribe();
                ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -62,7 +62,7 @@ ruleTester({ types: true }).run("no-ignored-subscription", rule, {
         const s = new Subject<any>()
         s.subscribe();
           ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

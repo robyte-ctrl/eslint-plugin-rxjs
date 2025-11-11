@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-exposed-subjects");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-exposed-subjects";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-exposed-subjects", rule, {
@@ -98,7 +98,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
           readonly e = new Subject<void>();
                    ~ [forbidden { "subject": "e" }]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -113,7 +113,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
                       ~ [forbidden { "subject": "b" }]
           ) {}
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -131,7 +131,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
             this._submitSubject$ = set$;
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -149,7 +149,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
             return new Subject<any>();
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -181,7 +181,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
           }
         }
       `,
-      { options: [{ allowProtected: true }] }
+      { options: [{ allowProtected: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -198,7 +198,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
           protected d: Subject<any>;
                     ~ [forbidden { "subject": "d" }]
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -215,7 +215,7 @@ ruleTester({ types: true }).run("no-exposed-subjects", rule, {
             return this.foo$;
           }
         }
-      `
+      `,
     ),
   ],
 });

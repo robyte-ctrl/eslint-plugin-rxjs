@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-nested-subscribe");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-nested-subscribe";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-nested-subscribe", rule, {
@@ -77,7 +77,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           value => of("bar").subscribe()
                              ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -87,7 +87,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           next: value => of("bar").subscribe()
                                    ~~~~~~~~~ [forbidden]
         });
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -97,7 +97,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           next(value) { of("bar").subscribe(); }
                                   ~~~~~~~~~ [forbidden]
         });
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -108,7 +108,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           error => of("bar").subscribe()
                              ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -118,7 +118,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           error: error => of("bar").subscribe()
                                     ~~~~~~~~~ [forbidden]
         });
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -128,7 +128,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           error(error) { of("bar").subscribe(); }
                                    ~~~~~~~~~ [forbidden]
         });
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -140,7 +140,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           () => of("bar").subscribe()
                           ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -150,7 +150,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           complete: () => of("bar").subscribe()
                                     ~~~~~~~~~ [forbidden]
         });
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -160,7 +160,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           complete() { of("bar").subscribe(); }
                                  ~~~~~~~~~ [forbidden]
         });
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -171,7 +171,7 @@ ruleTester({ types: true }).run("no-nested-subscribe", rule, {
           () => subscribable.subscribe()
                              ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
   ],
 });

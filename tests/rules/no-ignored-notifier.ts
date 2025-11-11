@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-notifier");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-ignored-notifier";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-ignored-notifier", rule, {
@@ -62,7 +62,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
           repeatWhen(notifications => range(0, 3))
           ~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -76,7 +76,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
           repeatWhen(() => range(0, 3))
           ~~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -94,7 +94,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
             }
           )
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -112,7 +112,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
             }
           )
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -126,7 +126,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
           retryWhen(errors => range(0, 3))
           ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -140,7 +140,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
           retryWhen(() => range(0, 3))
           ~~~~~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -158,7 +158,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
             }
           )
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -176,7 +176,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
             }
           )
         );
-      `
+      `,
     ),
   ],
 });

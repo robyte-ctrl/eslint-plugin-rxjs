@@ -3,13 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import {
-  getLoc,
-  getParent,
-  getParserServices,
-  getTypeServices,
-} from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getLoc, getParent, getParserServices, getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -17,7 +12,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids the use of Finnish notation.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -52,7 +47,7 @@ const rule = ruleCreator({
       "ArrayPattern > Identifier[name=/[$]+$/]": (node: es.Identifier) =>
         checkNode(node),
       "ArrowFunctionExpression > Identifier[name=/[$]+$/]": (
-        node: es.Identifier
+        node: es.Identifier,
       ) => {
         const parent = getParent(node) as es.ArrowFunctionExpression;
         if (node !== parent.body) {
@@ -60,10 +55,10 @@ const rule = ruleCreator({
         }
       },
       "PropertyDefinition[key.name=/[$]+$/] > Identifier": (
-        node: es.Identifier
+        node: es.Identifier,
       ) => checkNode(node, getParent(node)),
       "FunctionDeclaration > Identifier[name=/[$]+$/]": (
-        node: es.Identifier
+        node: es.Identifier,
       ) => {
         const parent = getParent(node) as es.FunctionDeclaration;
         if (node === parent.id) {
@@ -73,7 +68,7 @@ const rule = ruleCreator({
         }
       },
       "FunctionExpression > Identifier[name=/[$]+$/]": (
-        node: es.Identifier
+        node: es.Identifier,
       ) => {
         const parent = getParent(node) as es.FunctionExpression;
         if (node === parent.id) {
@@ -85,22 +80,22 @@ const rule = ruleCreator({
       "MethodDefinition[key.name=/[$]+$/]": (node: es.MethodDefinition) =>
         checkNode(node.key, node),
       "ObjectExpression > Property[computed=false][key.name=/[$]+$/]": (
-        node: es.Property
+        node: es.Property,
       ) => checkNode(node.key),
       "ObjectPattern > Property[value.name=/[$]+$/]": (node: es.Property) =>
         checkNode(node.value),
       "TSCallSignatureDeclaration > Identifier[name=/[$]+$/]": (
-        node: es.Node
+        node: es.Node,
       ) => checkNode(node),
       "TSConstructSignatureDeclaration > Identifier[name=/[$]+$/]": (
-        node: es.Node
+        node: es.Node,
       ) => checkNode(node),
       "TSParameterProperty > Identifier[name=/[$]+$/]": (node: es.Identifier) =>
         checkNode(node),
       "TSPropertySignature > Identifier[name=/[$]+$/]": (node: es.Identifier) =>
         checkNode(node, getParent(node)),
       "TSMethodSignature > Identifier[name=/[$]+$/]": (node: es.Identifier) => {
-        const parent = getParent(node) as any;
+        const parent = getParent(node) as es.TSMethodSignature;
         if (node === parent.key) {
           checkNode(node, parent);
         } else {

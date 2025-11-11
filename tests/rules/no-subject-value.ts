@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-subject-value");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-subject-value";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-subject-value", rule, {
@@ -24,7 +24,7 @@ ruleTester({ types: true }).run("no-subject-value", rule, {
         const subject = new BehaviorSubject<number>(1);
         console.log(subject.value);
                             ~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -33,7 +33,7 @@ ruleTester({ types: true }).run("no-subject-value", rule, {
         const subject = new BehaviorSubject<number>(1);
         console.log(subject.getValue());
                             ~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

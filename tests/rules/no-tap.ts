@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-tap");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-tap";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-tap", rule, {
@@ -37,7 +37,7 @@ ruleTester({ types: false }).run("no-tap", rule, {
           map(x => x * 2),
           tap(value => console.log(value))
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -48,7 +48,7 @@ ruleTester({ types: false }).run("no-tap", rule, {
           map(x => x * 2),
           tap(value => console.log(value))
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -60,7 +60,7 @@ ruleTester({ types: false }).run("no-tap", rule, {
           map(x => x * 2),
           tapAlias(value => console.log(value))
         );
-      `
+      `,
     ),
   ],
 });

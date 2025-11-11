@@ -3,8 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getTypeServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
 const rule = ruleCreator({
@@ -12,7 +12,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids operators that return connectable observables.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,

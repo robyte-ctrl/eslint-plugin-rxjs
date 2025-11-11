@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/throw-error");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/throw-error";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("throw-error", rule, {
@@ -124,7 +124,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
         // throw string
         const a = () => { throw "error"; };
                                 ~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -135,7 +135,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
         function errorMessage() {
           return "error";
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -144,7 +144,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
 
         const a = () => { throw errorMessage; };
                                 ~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -153,7 +153,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
 
         const ob1 = throwError("Boom!");
                                ~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -166,7 +166,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
         function errorMessage() {
           return "Boom!";
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -180,7 +180,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
             { code: "NOT_FOUND" }
           );
         };
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -189,7 +189,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
 
         const ob1 = throwError(() => "Boom!");
                                ~~~~~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -202,7 +202,7 @@ ruleTester({ types: true }).run("throw-error", rule, {
         function errorMessage() {
           return "Boom!";
         }
-      `
+      `,
     ),
   ],
 });

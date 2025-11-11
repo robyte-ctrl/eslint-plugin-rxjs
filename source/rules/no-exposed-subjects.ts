@@ -3,8 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getTypeServices, isIdentifier } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getTypeServices, isIdentifier } from "../etc";
 import { ruleCreator } from "../utils";
 
 const defaultAllowedTypesRegExp = /^EventEmitter$/;
@@ -17,7 +17,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids exposed (i.e. non-private) subjects.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -37,7 +37,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "no-exposed-subjects",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const [config = {}] = context.options;
     const { allowProtected = false } = config;
     const { couldBeSubject, couldBeType } = getTypeServices(context);
@@ -55,7 +55,7 @@ const rule = ruleCreator({
 
     return {
       [`PropertyDefinition[accessibility!=${accessibilityRexExp}]`]: (
-        node: es.PropertyDefinition
+        node: es.PropertyDefinition,
       ) => {
         if (isSubject(node)) {
           const { key } = node;
@@ -104,7 +104,7 @@ const rule = ruleCreator({
         },
       [`MethodDefinition[accessibility!=${accessibilityRexExp}][kind='method']`]:
         (node: es.MethodDefinition) => {
-          const functionExpression = node.value as any;
+          const functionExpression = node.value;
           const returnType = functionExpression.returnType;
           if (!returnType) {
             return;

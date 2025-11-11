@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-switchmap");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-unsafe-switchmap";
 import { ruleTester } from "../utils";
 
 const setup = stripIndent`
@@ -86,7 +86,7 @@ ruleTester({ types: true }).run("no-unsafe-switchmap", rule, {
                                                                                     ~~~~~~~~~ [forbidden]
         const pipedMorePutEffect = actions.pipe(ofType("DO_SOMETHING", "PUT_SOMETHING"), tap(() => {}), switchMap(() => EMPTY));
                                                                                                         ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -96,7 +96,7 @@ ruleTester({ types: true }).run("no-unsafe-switchmap", rule, {
                                                                                                         ~~~~~~~~~ [forbidden]
         const pipedMorePutEpic = (action$: Actions) => action$.pipe(ofType("DO_SOMETHING", "PUT_SOMETHING"), tap(() => {}), switchMap(() => EMPTY));
                                                                                                                             ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -106,7 +106,7 @@ ruleTester({ types: true }).run("no-unsafe-switchmap", rule, {
                                                                                         ~~~~~~~~~ [forbidden]
         const pipedOfTypeCamelCasePutEffect = actions.pipe(ofType(PutSomething), tap(() => {}), switchMap(() => EMPTY));
                                                                                                 ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -123,7 +123,7 @@ ruleTester({ types: true }).run("no-unsafe-switchmap", rule, {
             allow: ["FOO"],
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -138,7 +138,7 @@ ruleTester({ types: true }).run("no-unsafe-switchmap", rule, {
             disallow: ["FOO"],
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -178,7 +178,7 @@ ruleTester({ types: true }).run("no-unsafe-switchmap", rule, {
         const pipedOfTypeCamelCaseGetEffect = that.actions.pipe(ofType(Actions.types.GetSomething), tap(() => {}), switchMap(() => EMPTY));
         const pipedOfTypeCamelCasePutEffect = that.actions.pipe(ofType(Actions.types.PutSomething), tap(() => {}), switchMap(() => EMPTY));
                                                                                                                    ~~~~~~~~~ [forbidden]
-      `
+      `,
     ),
   ],
 });

@@ -1,9 +1,24 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
+import { ESLintUtils, TSESLint } from '@typescript-eslint/utils';
 
-import { ESLintUtils } from "@typescript-eslint/experimental-utils";
+export interface RxjsXRuleDocs<Options extends readonly unknown[], Desc extends string> {
+  description: Desc;
+  recommended?: TSESLint.RuleRecommendation | TSESLint.RuleRecommendationAcrossConfigs<Options>;
+  requiresTypeChecking?: boolean;
+}
+
+const REPO_URL = 'https://github.com/robyte-ctrl/eslint-plugin-rxjs';
+
+export const ruleCreator = ESLintUtils.RuleCreator<RxjsXRuleDocs<unknown[], string>>(
+  (name) =>
+    `${REPO_URL}/tree/main/docs/rules/${name}.md`,
+  // Ensure the resulting types are narrowed to exactly what each rule declares.
+) as <
+  Options extends readonly unknown[],
+  MessageIds extends string,
+  Desc extends string,
+  Docs extends RxjsXRuleDocs<Options, Desc>,
+>({ meta, name, ...rule }: Readonly<ESLintUtils.RuleWithMetaAndName<Options, MessageIds, Docs>>) => TSESLint.RuleModule<MessageIds, Options, Docs>;
+
 
 export function createRegExpForWords(
   config: string | string[]
@@ -24,8 +39,3 @@ export function escapeRegExp(text: string): string {
   // https://stackoverflow.com/a/3561711/6680611
   return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
 }
-
-export const ruleCreator = ESLintUtils.RuleCreator(
-  (name) =>
-    `https://github.com/cartant/eslint-plugin-rxjs/tree/main/docs/rules/${name}.md`
-);

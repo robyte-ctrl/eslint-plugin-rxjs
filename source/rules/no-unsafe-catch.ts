@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 import { stripIndent } from "common-tags";
 import {
   getTypeServices,
@@ -11,7 +11,7 @@ import {
   isCallExpression,
   isFunctionDeclaration,
   isIdentifier,
-} from "eslint-etc";
+} from "../etc";
 import { defaultObservable } from "../constants";
 import { ruleCreator } from "../utils";
 
@@ -24,7 +24,7 @@ const rule = ruleCreator({
   meta: {
     docs: {
       description: "Forbids unsafe `catchError` usage in effects and epics.",
-      recommended: false,
+      // recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -45,7 +45,7 @@ const rule = ruleCreator({
     type: "problem",
   },
   name: "no-unsafe-catch",
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const invalidOperatorsRegExp = /^(catchError)$/;
 
     const [config = {}] = context.options;

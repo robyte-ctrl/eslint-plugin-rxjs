@@ -4,8 +4,8 @@
  */
 
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-first");
+import { fromFixture } from "../from-fixture";
+import rule from "../../source/rules/no-unsafe-first";
 import { ruleTester } from "../utils";
 
 const setup = stripIndent`
@@ -156,7 +156,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           first()
           ~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -169,7 +169,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           take(1)
           ~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -182,7 +182,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           first()
           ~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -195,7 +195,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           take(1)
           ~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -208,7 +208,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           first()
           ~~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -221,7 +221,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           take(1)
           ~~~~ [forbidden]
         );
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -241,7 +241,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
             observable: "foo",
           },
         ],
-      }
+      },
     ),
   ],
 });
