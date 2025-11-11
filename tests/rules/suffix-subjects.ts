@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/suffix-subjects";
+import { rule } from "../../source/rules/suffix-subjects";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("suffix-subjects", rule, {

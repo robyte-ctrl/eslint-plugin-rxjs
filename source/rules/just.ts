@@ -6,7 +6,9 @@
 import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "just";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -21,7 +23,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "just",
+  name,
   create: (context) => {
     return {
       "ImportDeclaration[source.value='rxjs'] > ImportSpecifier[imported.name='of']":
@@ -54,5 +56,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

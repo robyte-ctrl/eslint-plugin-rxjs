@@ -1,7 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const etc_1 = require("../etc");
 const utils_1 = require("../utils");
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-async-subscribe";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions: [],
     meta: {
         docs: {
@@ -15,7 +18,7 @@ const rule = (0, utils_1.ruleCreator)({
         schema: [],
         type: "problem",
     },
-    name: "no-async-subscribe",
+    name: exports.name,
     create: (context) => {
         const { couldBeObservable } = (0, etc_1.getTypeServices)(context);
         function checkNode(node) {
@@ -42,4 +45,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

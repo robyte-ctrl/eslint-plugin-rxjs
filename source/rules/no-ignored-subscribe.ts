@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-ignored-subscribe";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -23,7 +25,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-ignored-subscribe",
+  name,
   create: (context) => {
     const { couldBeObservable, couldBeType } = getTypeServices(context);
 
@@ -44,5 +46,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

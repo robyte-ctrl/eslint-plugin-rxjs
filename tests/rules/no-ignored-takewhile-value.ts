@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-ignored-takewhile-value";
+import { rule } from "../../source/rules/no-ignored-takewhile-value";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {

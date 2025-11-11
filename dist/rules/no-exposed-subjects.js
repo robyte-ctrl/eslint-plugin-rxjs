@@ -1,13 +1,16 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const etc_1 = require("../etc");
 const utils_1 = require("../utils");
 const defaultAllowedTypesRegExp = /^EventEmitter$/;
 const defaultOptions = [];
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-exposed-subjects";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
-            description: "Forbids exposed (i.e. non-private) subjects.",
+            description: "Forbids exposing subjects.",
         },
         fixable: undefined,
         hasSuggestions: false,
@@ -25,7 +28,7 @@ const rule = (0, utils_1.ruleCreator)({
         ],
         type: "problem",
     },
-    name: "no-exposed-subjects",
+    name: exports.name,
     create: (context) => {
         const [config = {}] = context.options;
         const { allowProtected = false } = config;
@@ -106,4 +109,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

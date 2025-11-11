@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getParent } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-ignored-replay-buffer";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -23,7 +25,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-ignored-replay-buffer",
+  name,
   create: (context) => {
     function checkNode(
       node: es.Node,
@@ -60,5 +62,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

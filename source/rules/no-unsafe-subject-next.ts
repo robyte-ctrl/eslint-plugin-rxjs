@@ -10,7 +10,9 @@ import { couldBeType, isReferenceType, isUnionType } from "../tsutils-etc";
 import * as ts from "typescript";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-unsafe-subject-next";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -25,7 +27,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-unsafe-subject-next",
+  name,
   create: (context) => {
     const { esTreeNodeToTSNodeMap } = getParserServices(context);
     const { typeChecker } = getTypeServices(context);
@@ -66,5 +68,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

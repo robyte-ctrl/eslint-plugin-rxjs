@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getLoc, getParent, getParserServices, getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-finnish";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-finnish",
+  name,
   create: (context) => {
     const { esTreeNodeToTSNodeMap } = getParserServices(context);
     const { couldBeObservable, couldReturnObservable } =
@@ -107,5 +109,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

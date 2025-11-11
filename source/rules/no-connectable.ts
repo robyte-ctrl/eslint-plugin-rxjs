@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-connectable";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-connectable",
+  name,
   create: (context) => {
     const { couldBeFunction } = getTypeServices(context);
     return {
@@ -46,5 +48,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

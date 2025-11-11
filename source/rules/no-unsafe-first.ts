@@ -13,7 +13,9 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-unsafe-first";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -39,7 +41,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "no-unsafe-first",
+  name,
   create: (context) => {
     const invalidOperatorsRegExp = /^(take|first)$/;
 
@@ -91,5 +93,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

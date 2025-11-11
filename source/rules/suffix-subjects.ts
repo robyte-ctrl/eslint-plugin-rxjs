@@ -21,7 +21,9 @@ const defaultOptions: readonly {
   variables?: boolean;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "suffix-subjects";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -47,7 +49,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "suffix-subjects",
+  name,
   create: (context) => {
     const { esTreeNodeToTSNodeMap } = getParserServices(context);
     const { couldBeType } = getTypeServices(context);
@@ -232,5 +234,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

@@ -1,6 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const utils_1 = require("../utils");
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "macro";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions: [],
     meta: {
         docs: {
@@ -14,7 +17,7 @@ const rule = (0, utils_1.ruleCreator)({
         schema: [],
         type: "problem",
     },
-    name: "macro",
+    name: exports.name,
     create: (context) => {
         let hasFailure = false;
         let hasMacroImport = false;
@@ -57,4 +60,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

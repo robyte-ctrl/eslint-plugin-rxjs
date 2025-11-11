@@ -35,7 +35,9 @@ const defaultOptions: readonly {
   allowExplicitAny?: boolean;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-implicit-any-catch";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -76,7 +78,7 @@ const rule = ruleCreator({
     ],
     type: "suggestion",
   },
-  name: "no-implicit-any-catch",
+  name,
   create: (context) => {
     const [config = {}] = context.options;
     const { allowExplicitAny = false } = config;
@@ -193,5 +195,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

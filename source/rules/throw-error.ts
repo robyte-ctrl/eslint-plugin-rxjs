@@ -9,7 +9,9 @@ import { couldBeFunction, couldBeType, isAny, isUnknown } from "../tsutils-etc";
 import * as ts from "typescript";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "throw-error";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -25,7 +27,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "throw-error",
+  name,
   create: (context) => {
     const { esTreeNodeToTSNodeMap, program } = getParserServices(context);
     const { couldBeObservable, getType } = getTypeServices(context);
@@ -63,5 +65,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

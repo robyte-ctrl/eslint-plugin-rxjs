@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-sharereplay";
+import { rule } from "../../source/rules/no-sharereplay";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-sharereplay", rule, {

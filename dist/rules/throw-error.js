@@ -1,8 +1,11 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const etc_1 = require("../etc");
 const tsutils_etc_1 = require("../tsutils-etc");
 const utils_1 = require("../utils");
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "throw-error";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions: [],
     meta: {
         docs: {
@@ -16,7 +19,7 @@ const rule = (0, utils_1.ruleCreator)({
         schema: [],
         type: "problem",
     },
-    name: "throw-error",
+    name: exports.name,
     create: (context) => {
         const { esTreeNodeToTSNodeMap, program } = (0, etc_1.getParserServices)(context);
         const { couldBeObservable, getType } = (0, etc_1.getTypeServices)(context);
@@ -50,4 +53,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

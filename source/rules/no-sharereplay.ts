@@ -10,7 +10,9 @@ const defaultOptions: readonly {
   allowConfig?: boolean;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-sharereplay";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -34,7 +36,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "no-sharereplay",
+  name,
   create: (context) => {
     const [config = {}] = context.options;
     const { allowConfig = true } = config;
@@ -58,5 +60,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

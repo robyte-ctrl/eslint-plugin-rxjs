@@ -1,7 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const utils_1 = require("../utils");
 const defaultOptions = [];
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-sharereplay";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
@@ -23,7 +26,7 @@ const rule = (0, utils_1.ruleCreator)({
         ],
         type: "problem",
     },
-    name: "no-sharereplay",
+    name: exports.name,
     create: (context) => {
         const [config = {}] = context.options;
         const { allowConfig = true } = config;
@@ -45,4 +48,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

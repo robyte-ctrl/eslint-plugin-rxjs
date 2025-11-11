@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-ignored-notifier";
+import { rule } from "../../source/rules/no-ignored-notifier";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-ignored-notifier", rule, {

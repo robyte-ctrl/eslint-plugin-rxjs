@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const tslib_1 = require("tslib");
 const common_tags_1 = require("common-tags");
 const etc_1 = require("../etc");
@@ -9,7 +11,8 @@ function isTypeReference(type) {
     return "target" in type && Boolean(type.target);
 }
 const defaultOptions = [];
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-cyclic-action";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
@@ -33,7 +36,7 @@ const rule = (0, utils_1.ruleCreator)({
         ],
         type: "problem",
     },
-    name: "no-cyclic-action",
+    name: exports.name,
     create: (context) => {
         const [config = {}] = context.options;
         const { observable = constants_1.defaultObservable } = config;
@@ -100,4 +103,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

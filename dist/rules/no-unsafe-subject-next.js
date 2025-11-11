@@ -1,11 +1,14 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const tslib_1 = require("tslib");
 const etc_1 = require("../etc");
 const tsutils = tslib_1.__importStar(require("tsutils"));
 const tsutils_etc_1 = require("../tsutils-etc");
 const ts = tslib_1.__importStar(require("typescript"));
 const utils_1 = require("../utils");
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-unsafe-subject-next";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions: [],
     meta: {
         docs: {
@@ -19,7 +22,7 @@ const rule = (0, utils_1.ruleCreator)({
         schema: [],
         type: "problem",
     },
-    name: "no-unsafe-subject-next",
+    name: exports.name,
     create: (context) => {
         const { esTreeNodeToTSNodeMap } = (0, etc_1.getParserServices)(context);
         const { typeChecker } = (0, etc_1.getTypeServices)(context);
@@ -52,4 +55,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

@@ -12,7 +12,9 @@ import {
 } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-unbound-methods";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -27,7 +29,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-unbound-methods",
+  name,
   create: (context) => {
     const { couldBeObservable, couldBeSubscription, getType } =
       getTypeServices(context);
@@ -88,5 +90,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

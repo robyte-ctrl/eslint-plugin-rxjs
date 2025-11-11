@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-subclass";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-subclass",
+  name,
   create: (context) => {
     const { couldBeType } = getTypeServices(context);
 
@@ -54,5 +56,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-exposed-subjects";
+import { rule } from "../../source/rules/no-exposed-subjects";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-exposed-subjects", rule, {

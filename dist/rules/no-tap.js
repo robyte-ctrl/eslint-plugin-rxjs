@@ -1,6 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const utils_1 = require("../utils");
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-tap";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions: [],
     meta: {
         deprecated: true,
@@ -16,7 +19,7 @@ const rule = (0, utils_1.ruleCreator)({
         schema: [],
         type: "problem",
     },
-    name: "no-tap",
+    name: exports.name,
     create: (context) => {
         return {
             [String.raw `ImportDeclaration[source.value=/^rxjs(\u002foperators)?$/] > ImportSpecifier[imported.name='tap']`]: (node) => {
@@ -35,4 +38,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

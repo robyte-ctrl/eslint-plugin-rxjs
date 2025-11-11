@@ -1,9 +1,12 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const utils_1 = require("@typescript-eslint/utils");
 const common_tags_1 = require("common-tags");
 const utils_2 = require("../utils");
 const defaultOptions = [];
-const rule = (0, utils_2.ruleCreator)({
+exports.name = "ban-observables";
+exports.rule = (0, utils_2.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
@@ -24,7 +27,7 @@ const rule = (0, utils_2.ruleCreator)({
         ],
         type: "problem",
     },
-    name: "ban-observables",
+    name: exports.name,
     create: (context) => {
         const bans = [];
         const [config] = context.options;
@@ -68,4 +71,3 @@ const rule = (0, utils_2.ruleCreator)({
         };
     },
 });
-module.exports = rule;

@@ -1,10 +1,13 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const common_tags_1 = require("common-tags");
 const etc_1 = require("../etc");
 const constants_1 = require("../constants");
 const utils_1 = require("../utils");
 const defaultOptions = [];
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-unsafe-first";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
@@ -28,7 +31,7 @@ const rule = (0, utils_1.ruleCreator)({
         ],
         type: "problem",
     },
-    name: "no-unsafe-first",
+    name: exports.name,
     create: (context) => {
         const invalidOperatorsRegExp = /^(take|first)$/;
         const [config = {}] = context.options;
@@ -71,4 +74,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

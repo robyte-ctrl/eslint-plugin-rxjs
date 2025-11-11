@@ -22,7 +22,9 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-unsafe-switchmap";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -68,7 +70,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "no-unsafe-switchmap",
+  name,
   create: (context) => {
     const defaultDisallow = [
       "add",
@@ -166,5 +168,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

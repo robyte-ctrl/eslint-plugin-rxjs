@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/macro";
+import { rule } from "../../source/rules/macro";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("macro", rule, {

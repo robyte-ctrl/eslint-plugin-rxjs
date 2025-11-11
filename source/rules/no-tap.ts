@@ -6,7 +6,9 @@
 import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-tap";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     deprecated: true,
@@ -23,7 +25,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-tap",
+  name,
   create: (context) => {
     return {
       [String.raw`ImportDeclaration[source.value=/^rxjs(\u002foperators)?$/] > ImportSpecifier[imported.name='tap']`]:
@@ -43,5 +45,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

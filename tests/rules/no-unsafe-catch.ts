@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-unsafe-catch";
+import { rule } from "../../source/rules/no-unsafe-catch";
 import { ruleTester } from "../utils";
 
 const setup = stripIndent`

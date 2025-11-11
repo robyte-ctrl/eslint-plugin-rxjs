@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const tslib_1 = require("tslib");
 const common_tags_1 = require("common-tags");
 const decamelize_1 = tslib_1.__importDefault(require("decamelize"));
@@ -6,7 +8,8 @@ const etc_1 = require("../etc");
 const constants_1 = require("../constants");
 const utils_1 = require("../utils");
 const defaultOptions = [];
-const rule = (0, utils_1.ruleCreator)({
+exports.name = "no-unsafe-switchmap";
+exports.rule = (0, utils_1.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
@@ -51,7 +54,7 @@ const rule = (0, utils_1.ruleCreator)({
         ],
         type: "problem",
     },
-    name: "no-unsafe-switchmap",
+    name: exports.name,
     create: (context) => {
         var _a, _b, _c;
         const defaultDisallow = [
@@ -134,4 +137,3 @@ const rule = (0, utils_1.ruleCreator)({
         };
     },
 });
-module.exports = rule;

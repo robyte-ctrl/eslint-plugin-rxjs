@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-tap";
+import { rule } from "../../source/rules/no-tap";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-tap", rule, {

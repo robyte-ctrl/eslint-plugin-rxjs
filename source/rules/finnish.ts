@@ -24,7 +24,9 @@ const defaultOptions: readonly {
   variables?: boolean;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "finnish";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -54,7 +56,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "finnish",
+  name,
   create: (context) => {
     const { esTreeNodeToTSNodeMap } = getParserServices(context);
     const {
@@ -301,5 +303,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

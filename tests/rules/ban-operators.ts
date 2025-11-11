@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/ban-operators";
+import { rule } from "../../source/rules/ban-operators";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("ban-operators", rule, {

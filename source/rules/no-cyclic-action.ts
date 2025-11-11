@@ -18,7 +18,9 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-cyclic-action";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -44,7 +46,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "no-cyclic-action",
+  name,
   create: (context) => {
     const [config = {}] = context.options;
     const { observable = defaultObservable } = config;
@@ -130,5 +132,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-redundant-notify";
+import { rule } from "../../source/rules/no-redundant-notify";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-redundant-notify", rule, {

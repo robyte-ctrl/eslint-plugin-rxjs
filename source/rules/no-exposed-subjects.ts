@@ -12,11 +12,13 @@ const defaultOptions: readonly {
   allowProtected?: boolean;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-exposed-subjects";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
-      description: "Forbids exposed (i.e. non-private) subjects.",
+      description: "Forbids exposing subjects.",
       // recommended: false,
     },
     fixable: undefined,
@@ -36,7 +38,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "no-exposed-subjects",
+  name,
   create: (context) => {
     const [config = {}] = context.options;
     const { allowProtected = false } = config;
@@ -129,5 +131,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

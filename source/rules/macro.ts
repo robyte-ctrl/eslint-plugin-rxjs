@@ -6,7 +6,9 @@
 import { TSESLint as eslint, TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "macro";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -21,7 +23,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "macro",
+  name,
   create: (context) => {
     let hasFailure = false;
     let hasMacroImport = false;
@@ -74,5 +76,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

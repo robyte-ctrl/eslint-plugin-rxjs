@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-implicit-any-catch";
+import { rule } from "../../source/rules/no-implicit-any-catch";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-implicit-any-catch", rule, {

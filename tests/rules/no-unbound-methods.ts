@@ -6,7 +6,7 @@
 import type { RunTests } from "@typescript-eslint/rule-tester";
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-unbound-methods";
+import { rule } from "../../source/rules/no-unbound-methods";
 import { ruleTester } from "../utils";
 
 type Tests = RunTests<"forbidden", readonly unknown[]>;

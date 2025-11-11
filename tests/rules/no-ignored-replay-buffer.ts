@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-ignored-replay-buffer";
+import { rule } from "../../source/rules/no-ignored-replay-buffer";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-ignored-replay-buffer", rule, {

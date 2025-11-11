@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-nested-subscribe";
+import { rule } from "../../source/rules/no-nested-subscribe";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-nested-subscribe", rule, {

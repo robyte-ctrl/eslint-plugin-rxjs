@@ -6,7 +6,9 @@
 import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-compat";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-compat",
+  name,
   create: (context) => {
     return {
       [String.raw`ImportDeclaration Literal[value=/^rxjs\u002f/]:not(Literal[value=/^rxjs\u002f(ajax|fetch|operators|testing|webSocket)/])`]:
@@ -35,5 +37,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

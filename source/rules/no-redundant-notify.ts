@@ -15,7 +15,9 @@ import {
 } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-redundant-notify";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -31,7 +33,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-redundant-notify",
+  name,
   create: (context) => {
     const { sourceCode } = context;
     const { couldBeType } = getTypeServices(context);
@@ -111,5 +113,3 @@ function isExpressionObserver(
   const { object } = callExpression.callee;
   return couldBeType(object, /^(Subject|Subscriber)$/);
 }
-
-export = rule;

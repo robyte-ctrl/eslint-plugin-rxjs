@@ -9,7 +9,9 @@ import { ruleCreator } from "../utils";
 
 const defaultOptions: readonly Record<string, boolean | string>[] = [];
 
-const rule = ruleCreator({
+export const name = "ban-observables";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -31,7 +33,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "ban-observables",
+  name,
   create: (context) => {
     const bans: { explanation: string; regExp: RegExp }[] = [];
 
@@ -83,5 +85,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

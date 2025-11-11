@@ -16,7 +16,9 @@ const defaultOptions: readonly {
   allowNext?: boolean;
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "prefer-observer";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -40,7 +42,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "prefer-observer",
+  name,
   create: (context) => {
     const { couldBeFunction, couldBeObservable } = getTypeServices(context);
     const [config = {}] = context.options;
@@ -141,8 +143,6 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;
 
 function isValidArgText(argText: string) {
   return argText && argText !== "undefined" && argText !== "null";

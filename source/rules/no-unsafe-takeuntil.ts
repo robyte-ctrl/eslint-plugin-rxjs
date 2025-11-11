@@ -19,7 +19,9 @@ const defaultOptions: readonly {
   allow?: string[];
 }[] = [];
 
-const rule = ruleCreator({
+export const name = "no-unsafe-takeuntil";
+
+export const rule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
@@ -46,7 +48,7 @@ const rule = ruleCreator({
     ],
     type: "problem",
   },
-  name: "no-unsafe-takeuntil",
+  name,
   create: (context) => {
     let checkedOperatorsRegExp = /^takeUntil$/;
     const allowedOperators = [
@@ -140,5 +142,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

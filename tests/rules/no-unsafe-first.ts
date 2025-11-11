@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-unsafe-first";
+import { rule } from "../../source/rules/no-unsafe-first";
 import { ruleTester } from "../utils";
 
 const setup = stripIndent`

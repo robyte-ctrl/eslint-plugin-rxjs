@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rule = exports.name = void 0;
 const utils_1 = require("@typescript-eslint/utils");
 const etc_1 = require("../etc");
 const utils_2 = require("../utils");
@@ -13,7 +15,8 @@ function isParenthesised(sourceCode, node) {
         after.range[0] >= node.range[1]);
 }
 const defaultOptions = [];
-const rule = (0, utils_2.ruleCreator)({
+exports.name = "no-implicit-any-catch";
+exports.rule = (0, utils_2.ruleCreator)({
     defaultOptions,
     meta: {
         docs: {
@@ -51,7 +54,7 @@ const rule = (0, utils_2.ruleCreator)({
         ],
         type: "suggestion",
     },
-    name: "no-implicit-any-catch",
+    name: exports.name,
     create: (context) => {
         const [config = {}] = context.options;
         const { allowExplicitAny = false } = config;
@@ -161,4 +164,3 @@ const rule = (0, utils_2.ruleCreator)({
         };
     },
 });
-module.exports = rule;

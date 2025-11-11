@@ -6,7 +6,9 @@
 import { TSESTree as es, TSESLint as eslint } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-internal";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-internal",
+  name,
   create: (context) => {
     function getReplacement(location: string) {
       const match = location.match(/^\s*('|")/);
@@ -82,5 +84,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

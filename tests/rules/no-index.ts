@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-index";
+import { rule } from "../../source/rules/no-index";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: false }).run("no-index", rule, {

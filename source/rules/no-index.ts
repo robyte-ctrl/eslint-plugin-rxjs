@@ -6,7 +6,9 @@
 import { TSESTree as es } from "@typescript-eslint/utils";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-index";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -21,7 +23,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-index",
+  name,
   create: (context) => {
     return {
       [String.raw`ImportDeclaration Literal[value=/^rxjs(?:\u002f\w+)?\u002findex/]`]:
@@ -34,5 +36,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

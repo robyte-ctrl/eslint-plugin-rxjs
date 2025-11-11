@@ -5,7 +5,7 @@
 
 import { stripIndent } from "common-tags";
 import { fromFixture } from "../from-fixture";
-import rule from "../../source/rules/no-subscribe-handlers";
+import { rule } from "../../source/rules/no-subscribe-handlers";
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("no-subscribe-handlers", rule, {

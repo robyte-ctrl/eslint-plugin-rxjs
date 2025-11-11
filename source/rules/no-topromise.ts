@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getTypeServices } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-topromise";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-topromise",
+  name,
   create: (context) => {
     const { couldBeObservable } = getTypeServices(context);
     return {
@@ -39,5 +41,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;

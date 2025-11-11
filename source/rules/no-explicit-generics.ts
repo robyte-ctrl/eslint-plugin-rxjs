@@ -7,7 +7,9 @@ import { TSESTree as es } from "@typescript-eslint/utils";
 import { getParent, isArrayExpression, isObjectExpression } from "../etc";
 import { ruleCreator } from "../utils";
 
-const rule = ruleCreator({
+export const name = "no-explicit-generics";
+
+export const rule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
@@ -22,7 +24,7 @@ const rule = ruleCreator({
     schema: [],
     type: "problem",
   },
-  name: "no-explicit-generics",
+  name,
   create: (context) => {
     function report(node: es.Node) {
       context.report({
@@ -65,5 +67,3 @@ const rule = ruleCreator({
     };
   },
 });
-
-export = rule;
